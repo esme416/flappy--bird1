@@ -1,16 +1,14 @@
 //Initialize Phaser Engine. Create a 400x490px game!
 
-var game = new Phaser.Game(400,490, Phasae.AUTO, 'gameDiv');
+var game = new Phaser.Game(400,490,Phaser.AUTO, 'gameDiv');
 
 //Creat our 'main' state that will contain the game
 //This is the body of the game itself
 //It should contain all code related to the game itself
 
-
 var mainState = {  
 
-
-  preload: function () { 
+  preload:function () { 
   
   
    //This fundtion wii execute at the beginning
@@ -20,10 +18,27 @@ var mainState = {
    
    game.stage.backgroundColor = "#71c5cf"; 
    
-      },  create: function () { 
+   game.load.image ('bird','assets/bird.png');
+   
+   game.load.image('pipe','assets/bird.png');
+   
+   },
+    
+     create: function () { 
       
     //This function is called right after preload function 
    //This is where we set up the game assets from earlier
+   
+   game.physics.startSystem(Phaser.Physics.ARACADE);
+   
+   this.bird = this.game.add.sprite(100,255,'bird');
+   
+   //Now that we have a bird and gravity ... we need to tell the bird
+   //to react to the gravity
+   
+   game.physics.arcade.enable(this.bird);
+   
+   this.bird.body.gravity.y = 1000 
    
    }, 
     update: function () {
